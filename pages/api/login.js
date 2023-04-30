@@ -4,7 +4,7 @@ export default function handler(req, res) {
     const { secret, pkey } = req.query
 
     // Generate a 32-byte key using PBKDF2
-    const key = crypto.pbkdf2Sync(secret, 'NovemberOscarSierraTangoRomeo', 100000, 32, 'sha256')
+    const key = crypto.pbkdf2Sync((secret ? secret : 'NovemberOscarSierraTangoRomeo'), 'NovemberOscarSierraTangoRomeo', 100000, 32, 'sha256')
 
     // Generate a random initialization vector
     const iv = crypto.randomBytes(16)
