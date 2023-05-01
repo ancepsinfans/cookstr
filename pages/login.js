@@ -11,6 +11,7 @@ export default function LoginPage() {
         <main>
             <div>
                 <form onSubmit={(e) => {
+
                     e.preventDefault()
                     toggleLogin()
                     router.push('/')

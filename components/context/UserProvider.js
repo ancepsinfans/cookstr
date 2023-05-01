@@ -1,8 +1,10 @@
-import { getPublicKey } from 'nostr-tools';
+import { getPublicKey, nip19 } from 'nostr-tools';
 import React from 'react';
+import { useRouter } from 'next/router';
 export const UserContext = React.createContext();
 
 function UserProvider({ children }) {
+    const router = useRouter()
     // const [iv, setIv] = React.useState('')
     // const [encryptedPrivateKey, setEncryptedPrivateKey] = React.useState('')
     const [privateKey, setPrivateKey] = React.useState('')
@@ -32,9 +34,17 @@ function UserProvider({ children }) {
     }, [])
 
     function savePrivateKey(val) {
-        setPrivateKey(val)
-        localStorage.setItem('privateKey', val.toString())
-        setPublicKey(val)
+        let v = val
+        if (val.includes('nsec')) {
+            let { data } = nip19.decode(val)
+            v = data
+            console.log(v)
+        }
+        console.log(v)
+        setPrivateKey(v)
+        localStorage.setItem('privateKey', v.toString())
+        setPublicKey(v)
+        router.push('/')
     }
 
 
