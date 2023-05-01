@@ -221,6 +221,16 @@ button {
   font-weight: 700;
 }
 
+@media only screen and (max-width: 600px) {
+  article {
+  width: 100vw;
+  margin: 0 0 0 0;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+}
+
 main {
 overflow: auto;
 height: 100vh;
