@@ -223,12 +223,16 @@ button {
 
 @media only screen and (max-width: 600px) {
   article {
-  width: 115vw;
-  margin: 0 -8.5% 0 ;
+  width: 100vw;
+  margin: 0 0 0 0 ;
   display:flex;
   flex-direction: column;
   justify-content: center;
 }
+ fieldset {
+  width: 95vw;
+  margin: 0 2% 0 ;
+ }
 }
 
 main {
