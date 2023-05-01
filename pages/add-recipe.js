@@ -281,7 +281,7 @@ export default function Recipe() {
                             }
                             return
                         }
-                        sendEventToRelay(formAndSignEvent(privateKey, 99, recipe))
+                        sendEventToRelay(formAndSignEvent(privateKey, 99, state))
                         dispatch({
                             type: 'reset'
                         })
@@ -289,7 +289,7 @@ export default function Recipe() {
                         setIngredient('')
                         setUnit('')
                         setStep('')
-
+                        window.alert('Recipe added!')
                     }}>
                         post it
                     </button>

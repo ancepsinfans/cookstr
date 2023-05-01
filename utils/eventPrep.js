@@ -39,13 +39,13 @@ export async function sendEventToRelay(event) {
     let relays = [
         'ws://localhost:8182',
         'wss://relay.damus.io',
-        // 'wss://relay.snort.social',
-        // 'wss://eden.nostr.land',
-        // 'wss://relay.nostr.info',
-        // 'wss://offchain.pub',
-        // 'wss://nostr-pub.wellorder.net',
-        // 'wss://nostr.fmt.wiz.biz',
-        // 'wss://nos.lol',
+        'wss://relay.snort.social',
+        'wss://eden.nostr.land',
+        'wss://relay.nostr.info',
+        'wss://offchain.pub',
+        'wss://nostr-pub.wellorder.net',
+        'wss://nostr.fmt.wiz.biz',
+        'wss://nos.lol',
     ]
     // let pubs = pool.publish(relays, event)
     // pubs.on('ok', () => {
