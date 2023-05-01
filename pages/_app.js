@@ -223,8 +223,8 @@ button {
 
 @media only screen and (max-width: 600px) {
   article {
-  width: 100vw;
-  margin: 0 0 0 0;
+  width: 115vw;
+  margin: 0 -8.5% 0 ;
   display:flex;
   flex-direction: column;
   justify-content: center;
