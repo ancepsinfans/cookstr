@@ -2,10 +2,11 @@ import React from 'react'
 import { useSubscribe } from 'nostr-hooks';
 import { formAndSignEvent, sendEventToRelay } from '@/utils';
 import { UserContext } from '@/components/context/UserProvider';
+import { useRouter } from 'next/router';
 
 export default function User({ params }) {
     const { loggedIn, publicKey, privateKey } = React.useContext(UserContext);
-
+    const router = useRouter()
     const { id } = params
 
     const { events } = useSubscribe({
@@ -66,6 +67,7 @@ export default function User({ params }) {
                                 <button
                                     onClick={() => {
                                         sendEventToRelay(formAndSignEvent(privateKey, 5, 'removing test', [['e', `${recipe.id}`]]))
+                                        router.push('/')
                                     }}
                                 >delete</button>
                                 :

@@ -3,9 +3,12 @@ import { useImmerReducer } from 'use-immer';
 import { formAndSignEvent, sendEventToRelay } from '@/utils';
 import { UserContext } from '@/components/context/UserProvider';
 import { useRouter } from 'next/router';
+import TagInput from '@/components/TagInput/TagInput';
+
 
 const recipe = {
     name: 'Chocolate Chip Cookies',
+    tags: ['chocolate', 'cookies', 'dessert'],
     ingredients: [
         {
             amount: .75,
@@ -93,9 +96,30 @@ function reducer(draftState, action) {
             return;
         }
 
+        case 'ADD_TAG': {
+            if (!draftState.tags.includes(action.payload)) {
+
+                draftState.tags.push(action.payload)
+            }
+
+            return
+        }
+
+        case 'REMOVE_TAG': {
+            const idx = draftState.tags.indexOf(action.payload)
+            if (idx !== -1) {
+                draftState.tags.splice(idx, 1)
+            }
+            return
+        }
+        case 'SET_TAGS':
+            return action.payload;
+
         case 'reset': {
             draftState.ingredients = []
             draftState.instructions = []
+            draftState.name = ''
+            draftState.tags = []
             return;
         }
     }
@@ -106,6 +130,7 @@ export default function Recipe() {
     const { privateKey } = React.useContext(UserContext)
     const [state, dispatch] = useImmerReducer(reducer, {
         name: '',
+        tags: [],
         ingredients: [],
         instructions: [],
 
@@ -133,6 +158,11 @@ export default function Recipe() {
                                 })
                             }} />
                         </label>
+                        <br />
+
+                        <TagInput tags={state.tags} dispatch={dispatch} />
+
+
                         <h4>Ingredients</h4>
                         <ul>
                             {state.ingredients.map((e, idx) => {
@@ -251,7 +281,7 @@ export default function Recipe() {
                             }
                             return
                         }
-                        sendEventToRelay(formAndSignEvent(privateKey, 99, state))
+                        sendEventToRelay(formAndSignEvent(privateKey, 99, recipe))
                         dispatch({
                             type: 'reset'
                         })

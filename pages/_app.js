@@ -270,6 +270,13 @@ main>div {
   min-width: 85vw;
 }
 
+.tag>button {
+    font-size: 11px;
+  padding: 0px 5px;
+  margin-left: 5px;
+  line-height: 1.5;
+}
+
 `
 
 export default function App({ Component, pageProps }) {
