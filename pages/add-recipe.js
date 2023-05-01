@@ -1,7 +1,8 @@
 import React from 'react'
 import { useImmerReducer } from 'use-immer';
 import { formAndSignEvent, sendEventToRelay } from '@/utils';
-import { generatePrivateKey } from 'nostr-tools';
+import { UserContext } from '@/components/context/UserProvider';
+import { useRouter } from 'next/router';
 
 const recipe = {
     name: 'Chocolate Chip Cookies',
@@ -104,6 +105,7 @@ function reducer(draftState, action) {
 
 
 export default function Recipe() {
+    const { privateKey } = React.useContext(UserContext)
     const [state, dispatch] = useImmerReducer(reducer, {
         name: '',
         ingredients: [],
@@ -115,8 +117,7 @@ export default function Recipe() {
     const [ingredient, setIngredient] = React.useState('')
     const [step, setStep] = React.useState('')
 
-    const npkey = generatePrivateKey()
-    const pkey = '5463aeaacb9b172b66f94d9928bf9d1e806b61ad346c169a3e76aaf814992b60'
+    const router = useRouter()
 
     return (
         <main >
@@ -244,6 +245,13 @@ export default function Recipe() {
                     </form>
                 </div>
                 <button onClick={() => {
+                    if (privateKey === '') {
+                        if (confirm('Login first?')) {
+
+                            router.push('/login')
+                        }
+                        return
+                    }
                     sendEventToRelay(formAndSignEvent(pkey, 99, state))
                     dispatch({
                         type: 'reset'
