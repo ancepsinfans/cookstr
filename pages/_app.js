@@ -222,6 +222,7 @@ button {
 }
 
 @media only screen and (max-width: 600px) {
+
   article {
   width: 100vw;
   margin: 0 0 0 0 ;
@@ -233,10 +234,12 @@ button {
   width: 95vw;
   margin: 0 2% 0 ;
  }
+
+
 }
 
 main {
-overflow: auto;
+overflow: scroll;
 height: 100vh;
 padding: 20px 0;
 margin: -20px 0;

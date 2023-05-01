@@ -119,7 +119,7 @@ export default function Recipe() {
 
     return (
         <main >
-            <div>
+            <article id='add'>
                 <fieldset>
                     <div >
                         <h2>
@@ -264,7 +264,7 @@ export default function Recipe() {
                         post it
                     </button>
                 </fieldset>
-            </div>
+            </article>
 
         </main >
     )
