@@ -74,8 +74,6 @@ const OPTIONS = [
 
 ];
 
-
-
 function reducer(draftState, action) {
     switch (action.type) {
         case 'add-ingredient': {
@@ -253,7 +251,7 @@ export default function Recipe() {
                             }
                             return
                         }
-                        sendEventToRelay(formAndSignEvent(privateKey, 99, recipe))
+                        sendEventToRelay(formAndSignEvent(privateKey, 99, state))
                         dispatch({
                             type: 'reset'
                         })
