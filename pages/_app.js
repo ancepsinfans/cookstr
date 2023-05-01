@@ -4,7 +4,7 @@ import UserProvider from '@/components/context/UserProvider'
 import constants from '../styles/constants'
 import { createGlobalStyle } from 'styled-components'
 import NavBar from '@/components/NavBar/NavBar'
-
+import Head from 'next/head'
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -226,6 +226,13 @@ export default function App({ Component, pageProps }) {
   return (
     <UserProvider>
       <GlobalStyles />
+      <Head>
+
+        <title>
+          Cookstr
+        </title>
+
+      </Head>
       <NavBar />
       <Component {...pageProps} />
     </UserProvider>
