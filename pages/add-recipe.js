@@ -121,151 +121,152 @@ export default function Recipe() {
 
     return (
         <main >
-            <fieldset>
-                <div >
-                    <h2>
-                        Recipe for
-                    </h2>
-                    <label>
-                        <input type='text' value={state.name} onChange={(e) => {
-                            dispatch({
-                                'type': 'name',
-                                name: e.target.value
-                            })
-                        }} />
-                    </label>
-                    <h4>Ingredients</h4>
-                    <ul>
-                        {state.ingredients.map((e, idx) => {
-                            return (
-                                <li key={idx}>{`${e.amount} ${e.unit ? e.unit : ''} ${e.ingredient}`}</li>
-                            )
-                        })}
-                    </ul>
-                    <form onSubmit={(e) => {
+            <div>
+                <fieldset>
+                    <div >
+                        <h2>
+                            Recipe for
+                        </h2>
+                        <label>
+                            <input type='text' value={state.name} onChange={(e) => {
+                                dispatch({
+                                    'type': 'name',
+                                    name: e.target.value
+                                })
+                            }} />
+                        </label>
+                        <h4>Ingredients</h4>
+                        <ul>
+                            {state.ingredients.map((e, idx) => {
+                                return (
+                                    <li key={idx}>{`${e.amount} ${e.unit ? e.unit : ''} ${e.ingredient}`}</li>
+                                )
+                            })}
+                        </ul>
+                        <form onSubmit={(e) => {
 
-                        e.preventDefault()
+                            e.preventDefault()
+                            dispatch({
+                                type: 'add-ingredient',
+                                amount,
+                                unit,
+                                ingredient
+                            })
+                            setAmount('')
+                            setIngredient('')
+                            setUnit('')
+                        }}>
+                            <fieldset >
+                                <legend>Add ingredient</legend>
+                                <label htmlFor="amount">
+                                    amount:{'\t'}
+                                    <input
+                                        id="amount"
+                                        type='number'
+                                        min={0}
+                                        value={amount}
+                                        onChange={(e) => setAmount(e.target.value)}
+
+                                    />
+                                </label>
+                                <br />
+
+                                <label htmlFor="unit">
+                                    units:{' '}
+
+                                    <input
+                                        id="unit"
+                                        type='text'
+                                        list='units'
+                                        onChange={event => {
+                                            setUnit(event.target.value)
+                                        }}
+                                    />
+                                    <datalist id='units'>
+                                        {OPTIONS.map(option => (
+                                            <option
+                                                key={option}
+                                                value={option}
+                                            >
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </datalist>
+                                </label>
+                                <br />
+                                <label htmlFor="ingredient">
+                                    ingredient:{' '}
+                                    <input
+                                        id="ingredient"
+                                        required
+                                        value={ingredient}
+                                        onChange={(e) => setIngredient(e.target.value)}
+
+                                    />
+                                </label>
+                                <br />
+                                <button
+                                    type='submit'
+                                >
+                                    +
+                                </button>
+                            </fieldset>
+                        </form>
+                        <h4>Instructions</h4>
+                        <ol>
+                            {state.instructions.map((e, idx) => {
+                                return (
+                                    <li key={idx}>{e}</li>
+                                )
+                            })}
+                        </ol>
+                        <form onSubmit={(e) => {
+                            e.preventDefault()
+                            dispatch({ type: 'add-step', step })
+                            setStep('')
+                        }}>
+                            <fieldset >
+                                <legend>Add step</legend>
+                                <label htmlFor="step">
+                                    step:
+                                    <input
+                                        id="step"
+                                        value={step}
+                                        onChange={(e) => setStep(e.target.value)}
+
+                                    />
+                                </label>
+                                <br />
+                                <button
+                                    type='submit'
+                                >
+                                    +
+                                </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <button onClick={() => {
+                        if (privateKey === '') {
+                            if (confirm('Login first?')) {
+
+                                router.push('/login')
+                            }
+                            return
+                        }
+                        sendEventToRelay(formAndSignEvent(privateKey, 99, recipe))
                         dispatch({
-                            type: 'add-ingredient',
-                            amount,
-                            unit,
-                            ingredient
+                            type: 'reset'
                         })
                         setAmount('')
                         setIngredient('')
                         setUnit('')
-                    }}>
-                        <fieldset >
-                            <legend>Add ingredient</legend>
-                            <label htmlFor="amount">
-                                amount:{'\t'}
-                                <input
-                                    id="amount"
-                                    type='number'
-                                    min={0}
-                                    value={amount}
-                                    onChange={(e) => setAmount(e.target.value)}
-
-                                />
-                            </label>
-                            <br />
-
-                            <label htmlFor="unit">
-                                units:{' '}
-
-                                <input
-                                    id="unit"
-                                    type='text'
-                                    list='units'
-                                    onChange={event => {
-                                        setUnit(event.target.value)
-                                    }}
-                                />
-                                <datalist id='units'>
-                                    {OPTIONS.map(option => (
-                                        <option
-                                            key={option}
-                                            value={option}
-                                        >
-                                            {option}
-                                        </option>
-                                    ))}
-                                </datalist>
-                            </label>
-                            <br />
-                            <label htmlFor="ingredient">
-                                ingredient:{' '}
-                                <input
-                                    id="ingredient"
-                                    required
-                                    value={ingredient}
-                                    onChange={(e) => setIngredient(e.target.value)}
-
-                                />
-                            </label>
-                            <br />
-                            <button
-                                type='submit'
-                            >
-                                +
-                            </button>
-                        </fieldset>
-                    </form>
-                    <h4>Instructions</h4>
-                    <ol>
-                        {state.instructions.map((e, idx) => {
-                            return (
-                                <li key={idx}>{e}</li>
-                            )
-                        })}
-                    </ol>
-                    <form onSubmit={(e) => {
-                        e.preventDefault()
-                        dispatch({ type: 'add-step', step })
                         setStep('')
+
                     }}>
-                        <fieldset >
-                            <legend>Add step</legend>
-                            <label htmlFor="step">
-                                step:
-                                <input
-                                    id="step"
-                                    value={step}
-                                    onChange={(e) => setStep(e.target.value)}
-
-                                />
-                            </label>
-                            <br />
-                            <button
-                                type='submit'
-                            >
-                                +
-                            </button>
-                        </fieldset>
-                    </form>
-                </div>
-                <button onClick={() => {
-                    if (privateKey === '') {
-                        if (confirm('Login first?')) {
-
-                            router.push('/login')
-                        }
-                        return
-                    }
-                    sendEventToRelay(formAndSignEvent(pkey, 99, state))
-                    dispatch({
-                        type: 'reset'
-                    })
-                    setAmount('')
-                    setIngredient('')
-                    setUnit('')
-                    setStep('')
-
-                }}>
-                    post it
-                </button>
-            </fieldset>
-
+                        post it
+                    </button>
+                </fieldset>
+            </div>
 
         </main >
     )

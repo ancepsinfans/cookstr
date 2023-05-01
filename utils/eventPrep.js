@@ -4,6 +4,7 @@ import {
     signEvent,
     getEventHash,
     getPublicKey,
+    SimplePool,
     relayInit,
 } from 'nostr-tools'
 
@@ -31,30 +32,52 @@ export function formAndSignEvent(privateKey, kind, content, tags = []) {
         return event
     }
 }
+const pool = new SimplePool()
+
 
 export async function sendEventToRelay(event) {
+    let relays = [
+        'ws://localhost:8182',
+        'wss://relay.damus.io',
+    ]
+    //     'wss://relay.snort.social',
+    //     'wss://eden.nostr.land',
+    //     'wss://relay.nostr.info',
+    //     'wss://offchain.pub',
+    //     'wss://nostr-pub.wellorder.net',
+    //     'wss://nostr.fmt.wiz.biz',
+    //     'wss://nos.lol',
+    // ]
+    // let pubs = pool.publish(relays, event)
+    // pubs.on('ok', () => {
+    //     // this may be called multiple times, once for every relay that accepts the event
+    //     // ...
+    // })
+    relays.forEach(async r => {
 
-    const relay = relayInit(
-        'ws://localhost:8182'
-        // 'wss://relay.damus.io'
-    )
-    relay.on('connect', () => {
-        console.log(`connected to ${relay.url}`)
+        const relay = relayInit(
+            r
+            // 'ws://localhost:8182'
+            // 'wss://relay.damus.io'
+        )
+        relay.on('connect', () => {
+            console.log(`connected to ${relay.url}`)
+        })
+        relay.on('error', () => {
+            console.log(`failed to connect to ${relay.url}`)
+        })
+
+        await relay.connect()
+
+        let pub = relay.publish(event)
+        pub.on('ok', () => {
+            console.log(`${relay.url} has accepted our event`)
+        })
+        pub.on('failed', reason => {
+            console.log(`failed to publish to ${relay.url}: ${reason}`)
+        })
+
+
+        relay.close()
     })
-    relay.on('error', () => {
-        console.log(`failed to connect to ${relay.url}`)
-    })
-
-    await relay.connect()
-
-    let pub = relay.publish(event)
-    pub.on('ok', () => {
-        console.log(`${relay.url} has accepted our event`)
-    })
-    pub.on('failed', reason => {
-        console.log(`failed to publish to ${relay.url}: ${reason}`)
-    })
-
-
-    relay.close()
 }

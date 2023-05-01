@@ -1,10 +1,8 @@
 import { getPublicKey, nip19 } from 'nostr-tools';
 import React from 'react';
-import { useRouter } from 'next/router';
 export const UserContext = React.createContext();
 
 function UserProvider({ children }) {
-    const router = useRouter()
     // const [iv, setIv] = React.useState('')
     // const [encryptedPrivateKey, setEncryptedPrivateKey] = React.useState('')
     const [privateKey, setPrivateKey] = React.useState('')
@@ -48,7 +46,7 @@ function UserProvider({ children }) {
         if (v.length === 64) {
             setPublicKey(getPublicKey(v))
         }
-        router.push('/')
+
     }
 
 

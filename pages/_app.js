@@ -16,6 +16,14 @@ const GlobalStyles = createGlobalStyle`
     --blueAccent: ${constants.blueAccent};
     --teaAccent: ${constants.teaAccent};
     --powderBlue: ${constants.powderBlue};
+      --shadow-color: 4deg 65% 34%;
+  --shadow-elevation-low:
+    1px 0.2px 1.2px hsl(var(--shadow-color) / 0.49),
+    4.1px 0.8px 4.9px -2.2px hsl(var(--shadow-color) / 0.54);
+  --shadow-elevation-medium:
+    1px 0.2px 1.2px hsl(var(--shadow-color) / 0.46),
+    5.4px 1.1px 6.4px -1.1px hsl(var(--shadow-color) / 0.49),
+    20.5px 4.2px 24.3px -2.2px hsl(var(--shadow-color) / 0.52);
     
     // old
     --accentBlue40: ${constants.accentBlue40};
@@ -148,31 +156,52 @@ a {
 p {
   padding: 5px;
 }
-
+article {
+  width: 85vw;
+  margin: 0 0 0 5vw;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
 fieldset {
   border-radius: 23pt;
-  padding: 25px;
-  margin: 20px;
+  padding: 25px 25px 25px 50px;
+  margin: 40px;
  background: rgba(256,256,256,.45);
  border: 3px solid var(--black30);
+  box-shadow:
+    var(--shadow-elevation-medium);
+
+
+}
+fieldset>div>form>fieldset {
+    box-shadow:
+    var(--shadow-elevation-low);
+ 
 }
 
 fieldset>legend {
-  background-color: rgba(256,256,256,.45);
+background-color: #fbebe0;
   border: 3px solid var(--black30);
   border-radius: 23pt;
   padding: 0 5px;
+}
+
+fieldset>h2 {
+  text-decoration: underline 2pt var(--black30) dotted
 }
 
 input {
     border: 1px solid var(--black30);
   border-radius: 5pt;
   margin: 5px;
+  padding-left: 5px;
 }
 
 fieldset>label {
   display: flex;
   flex-direction: column;
+ 
 }
 
 ol, ul {
@@ -185,14 +214,15 @@ header>a, header>div {
 }
 
 button {
-  border-radius: 10%;
+  border-radius: 23pt;
   border: 1px solid var(--black30);
-  background-color: var(--powderBlue);
-  padding: 3px;
-  margin-top: 10px
+  background-color: var(--teaAccent);
+  padding: 0px 7px;
+  font-weight: 700;
 }
 
 main {
+overflow: auto;
 height: 100vh;
 padding: 20px 0;
 margin: -20px 0;
@@ -217,7 +247,10 @@ main>h3 {
 }
 
 main>div {
-  margin: 15px
+  align-self: center;
+  flex-basis: 4rem;
+  flex-grow: 5;
+  min-width: 85vw;
 }
 
 `
