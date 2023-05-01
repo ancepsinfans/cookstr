@@ -24,6 +24,8 @@ function UserProvider({ children }) {
         setLoggedIn(!loggedIn)
         localStorage.setItem('loggedIn', (!loggedIn).toString())
     }
+
+
     React.useEffect(() => {
         // Check if the user is already logged in
         const storedPrivateKey = localStorage.getItem('privateKey')
@@ -43,7 +45,9 @@ function UserProvider({ children }) {
         console.log(v)
         setPrivateKey(v)
         localStorage.setItem('privateKey', v.toString())
-        setPublicKey(v)
+        if (v.length === 64) {
+            setPublicKey(getPublicKey(v))
+        }
         router.push('/')
     }
 
