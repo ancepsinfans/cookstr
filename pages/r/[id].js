@@ -1,8 +1,11 @@
 import React from 'react'
 import { useSubscribe } from 'nostr-hooks';
 import { formAndSignEvent, sendEventToRelay } from '@/utils';
+import { UserContext } from '@/components/context/UserProvider';
 
 export default function User({ params }) {
+    const { loggedIn, publicKey, privateKey } = React.useContext(UserContext);
+
     const { id } = params
 
     const { events } = useSubscribe({
@@ -30,7 +33,7 @@ export default function User({ params }) {
 
                     <fieldset key={recipe.id} style={{ width: '50wv' }} >
                         <h2> {recipe.content.name}</h2>
-                        <aside>by <a href={`/u/${recipe.pubkey}`}>{trunc}</a></aside>
+                        <aside>by <a href={`/u/${recipe.pubkey}`}>{trunc}...</a></aside>
 
                         <h4>Ingredients</h4>
                         <ul>
@@ -48,11 +51,15 @@ export default function User({ params }) {
                                 )
                             })}
                         </ol>
-                        <button
-                            onClick={() => {
-                                sendEventToRelay(formAndSignEvent('5463aeaacb9b172b66f94d9928bf9d1e806b61ad346c169a3e76aaf814992b60', 5, 'removing test', [['e', `${recipe.id}`]]))
-                            }}
-                        >delete</button>
+                        {(loggedIn && publicKey === recipe.pubkey) ?
+                            <button
+                                onClick={() => {
+                                    sendEventToRelay(formAndSignEvent(privateKey, 5, 'removing test', [['e', `${recipe.id}`]]))
+                                }}
+                            >delete</button>
+                            :
+                            null
+                        }
                     </fieldset>
                 )
             })

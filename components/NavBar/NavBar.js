@@ -1,15 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
-import { getPublicKey } from "nostr-tools";
 import { UserContext } from "../context/UserProvider";
-import { useRouter } from "next/router";
 
 const NavBarStyled = styled.header`
   height: 50px;
   width: 100%;
-  background: var(--primaryMain);
-  border-bottom: 3px solid var(--accentBlue40);
+  background: var(--teaAccent);
+  border-bottom: 3px solid var(--black30);
   align-items: center;
   display: flex;
   position: sticky;
@@ -22,66 +20,49 @@ const NavBarStyled = styled.header`
 
 
 
-const Back = styled.div`
-width: 50px;
-  text-decoration: none;
-  font-weight: 700;
-  cursor: pointer;
-`
-
 const NavBar = () => {
   const { loggedIn, toggleLogin, publicKey, savePrivateKey } = React.useContext(UserContext);
-  const router = useRouter()
   const trunc = publicKey.slice(0, 5)
-  // let publicKey, trunc
-  // if (loggedIn) {
-  //   publicKey = getPublicKey(privateKey)
-  //   
-  // }
-  console.log(publicKey)
+
   return (
 
     <NavBarStyled >
-      <Back>
-        {
-          router.asPath === '/' ?
-            <Link href='/'>
-              Home
-            </Link> :
-            null
-        }
-
-      </Back>
+      <Link href='/add-recipe'>
+        Add
+      </Link>
 
       {loggedIn ?
         <Link href={`/u/${publicKey}`}>
           {`${trunc}...`}
         </Link>
-        : null
+        :
+        <Link href='/'>
+          Home
+        </Link>
       }
 
-      <div>
-        {!loggedIn ? (
-          <Link
-            id='login'
-            href='/login'
-          >
-            Login
-          </Link>
 
-        ) : (
-          <Link
-            id='logout'
-            href='/'
-            onClick={() => {
-              savePrivateKey('')
-              toggleLogin(false)
-            }}
-          >
-            Logout
-          </Link>
-        )}
-      </div>
+      {!loggedIn ? (
+        <Link
+          id='login'
+          href='/login'
+        >
+          Login
+        </Link>
+
+      ) : (
+        <Link
+          id='logout'
+          href='/'
+          onClick={() => {
+            savePrivateKey('')
+            toggleLogin(false)
+          }}
+        >
+          Logout
+        </Link>
+      )}
+
     </NavBarStyled >
   )
 }

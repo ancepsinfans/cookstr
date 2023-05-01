@@ -119,7 +119,7 @@ export default function Recipe() {
     const pkey = '5463aeaacb9b172b66f94d9928bf9d1e806b61ad346c169a3e76aaf814992b60'
 
     return (
-        <main style={{ display: 'flex' }}>
+        <main >
             <fieldset>
                 <div >
                     <h2>
@@ -157,7 +157,7 @@ export default function Recipe() {
                         <fieldset >
                             <legend>Add ingredient</legend>
                             <label htmlFor="amount">
-                                amount:{' '}
+                                amount:{'\t'}
                                 <input
                                     id="amount"
                                     type='number'
@@ -193,7 +193,7 @@ export default function Recipe() {
                             </label>
                             <br />
                             <label htmlFor="ingredient">
-                                ingredient:
+                                ingredient:{' '}
                                 <input
                                     id="ingredient"
                                     required

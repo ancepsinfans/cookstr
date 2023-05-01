@@ -8,6 +8,16 @@ import NavBar from '@/components/NavBar/NavBar'
 
 const GlobalStyles = createGlobalStyle`
   :root {
+
+    //new
+    --grey: ${constants.grey};
+    --backgroundOrange: ${constants.backgroundOrange};
+    --backgroundYellow: ${constants.backgroundYellow};
+    --blueAccent: ${constants.blueAccent};
+    --teaAccent: ${constants.teaAccent};
+    --powderBlue: ${constants.powderBlue};
+    
+    // old
     --accentBlue40: ${constants.accentBlue40};
     --accentBlue45: ${constants.accentBlue45};
     --accentBlue50: ${constants.accentBlue50};
@@ -57,6 +67,7 @@ const GlobalStyles = createGlobalStyle`
     --tooltip-background-color: ${constants.accentPurpleMain};
     --tooltip-margin: 30px;
     --tooltip-arrow-size: 6px;
+
   }
 
   /*
@@ -64,6 +75,7 @@ const GlobalStyles = createGlobalStyle`
 */
 *, *::before, *::after {
   box-sizing: border-box;
+
 }
 
 /*
@@ -73,6 +85,7 @@ const GlobalStyles = createGlobalStyle`
   margin: 0;
   padding: 0;
   line-height: calc(1em + 0.5rem);
+  
 }
 
 /*
@@ -81,9 +94,12 @@ const GlobalStyles = createGlobalStyle`
 html, body {
   height: auto;
 
-  background-color: var(--primary80);
+  ${'' /* background-color: var(--primary80);
+   */}
+ 
   font-family: 'Vollkorn', serif;
 }
+
 
 /*
   Typographic tweaks!
@@ -92,8 +108,7 @@ html, body {
 */
 body {
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  background-color: var(--main-color);
+  -webkit-font-smoothing: antialiased;  
 }
 
 /*
@@ -126,13 +141,85 @@ p, h1, h2, h3, h4, h5, h6, li, dl, dt, blockquote {
 }
 
 a {
-  color: var(--accentRedMain);
+  color: var(--black30);
   text-decoration: none;
 }
 
 p {
   padding: 5px;
 }
+
+fieldset {
+  border-radius: 23pt;
+  padding: 25px;
+  margin: 20px;
+ background: rgba(256,256,256,.45);
+ border: 3px solid var(--black30);
+}
+
+fieldset>legend {
+  background-color: rgba(256,256,256,.45);
+  border: 3px solid var(--black30);
+  border-radius: 23pt;
+  padding: 0 5px;
+}
+
+input {
+    border: 1px solid var(--black30);
+  border-radius: 5pt;
+  margin: 5px;
+}
+
+fieldset>label {
+  display: flex;
+  flex-direction: column;
+}
+
+ol, ul {
+  padding-left: 32px;
+}
+
+header>a, header>div {
+  color: var(--black30);
+  font-weight: 700;
+}
+
+button {
+  border-radius: 10%;
+  border: 1px solid var(--black30);
+  background-color: var(--powderBlue);
+  padding: 3px;
+  margin-top: 10px
+}
+
+main {
+height: 100vh;
+padding: 20px 0;
+margin: -20px 0;
+
+           background-image: linear-gradient(
+  325deg,
+  hsl(3deg 74% 59%) 0%,
+  hsl(8deg 80% 59%) 21%,
+  hsl(12deg 85% 59%) 30%,
+  hsl(16deg 90% 59%) 39%,
+  hsl(20deg 94% 58%) 46%,
+  hsl(24deg 96% 58%) 54%,
+  hsl(28deg 99% 57%) 61%,
+  hsl(32deg 100% 55%) 69%,
+  hsl(36deg 100% 53%) 79%,
+  hsl(40deg 100% 50%) 100%
+);
+}
+main>h3 {
+  text-align: center;
+  margin: 10px;
+}
+
+main>div {
+  margin: 15px
+}
+
 `
 
 export default function App({ Component, pageProps }) {
