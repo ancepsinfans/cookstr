@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { UserContext } from "../context/UserProvider";
+import { useRouter } from "next/router";
 
 const NavBarStyled = styled.header`
   height: 50px;
@@ -21,8 +22,14 @@ const NavBarStyled = styled.header`
 
 
 const NavBar = () => {
+  const router = useRouter()
   const { loggedIn, toggleLogin, publicKey, savePrivateKey } = React.useContext(UserContext);
-  const trunc = publicKey.slice(0, 5)
+
+  const toUserProfile = (
+    <Link href={`/u/${publicKey}`}>
+      {`${publicKey?.slice(0, 5)}...`}
+    </Link>
+  )
 
   return (
 
@@ -31,14 +38,14 @@ const NavBar = () => {
         Add
       </Link>
 
-      {loggedIn ?
-        <Link href={`/u/${publicKey}`}>
-          {`${trunc}...`}
+      {router.asPath !== '/' ?
+
+        <Link
+          style={{ fontSize: 'x-large' }}
+          href='/'>
+          🍳
         </Link>
-        :
-        <Link href='/'>
-          Home
-        </Link>
+        : (toUserProfile)
       }
 
 
@@ -51,16 +58,24 @@ const NavBar = () => {
         </Link>
 
       ) : (
-        <Link
-          id='logout'
-          href='/'
-          onClick={() => {
-            savePrivateKey('')
-            toggleLogin(false)
-          }}
-        >
-          Logout
-        </Link>
+
+        <div>
+          <Link
+            id='logout'
+            href='/'
+            onClick={() => {
+              savePrivateKey('')
+              toggleLogin(false)
+            }}
+          >
+            Logout
+          </Link>
+          {router.asPath !== '/' ?
+            (<>
+              {' // '}{toUserProfile}
+            </>) :
+            null}
+        </div>
       )}
 
     </NavBarStyled >

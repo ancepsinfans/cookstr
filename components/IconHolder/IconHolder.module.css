@@ -1,0 +1,37 @@
+ .wrapper {
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-start;
+     padding: 4px;
+     border: none;
+     border-radius: 8px;
+     height: fit-content;
+     color: white;
+     background-color: var(--teaAccent);
+     font-size: 1.125rem;
+     cursor: pointer;
+     border: 3px solid var(--black30);
+ }
+
+ .iconWrapper {
+     min-width: 30px;
+     /* border-radius: 4px; */
+     border: none;
+
+     border-radius: 100%;
+     padding: 5px 0px 5px 3px;
+     transition: background-color 200ms;
+ }
+
+ .iconWrapperPressed {
+     background-color: var(--darkTea)
+ }
+
+
+ .iconWrapper:hover {
+     background-color: var(--darkTea)
+ }
+
+ .iconWrapper:active {
+     transform: scale(.9);
+ }

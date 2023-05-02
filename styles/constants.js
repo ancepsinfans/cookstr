@@ -5,6 +5,7 @@ const constants = {
     backgroundYellow: '#FFAA00',
     blueAccent: '#52D1DC',
     teaAccent: '#9FC490',
+    darkTea: '#84B471',
     powderBlue: '#B8C5D6',
     // old
     accentBlue40: '#0588C7',

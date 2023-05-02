@@ -15,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
     --backgroundYellow: ${constants.backgroundYellow};
     --blueAccent: ${constants.blueAccent};
     --teaAccent: ${constants.teaAccent};
+    --darkTea: ${constants.darkTea};
     --powderBlue: ${constants.powderBlue};
       --shadow-color: 4deg 65% 34%;
   --shadow-elevation-low:
@@ -165,7 +166,7 @@ article {
 }
 fieldset {
   border-radius: 23pt;
-  padding: 25px 25px 25px 50px;
+  padding: 25px ;
   margin: 40px;
  background: rgba(256,256,256,.45);
  border: 3px solid var(--black30);

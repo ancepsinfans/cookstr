@@ -1,10 +1,32 @@
 import React from 'react';
-import Image from 'next/image';
+import { Bookmark, Heart, Share, Zap } from 'react-feather';
+import styles from './IconHolder.module.css';
+
 function IconHolder() {
   return (
-    <>
-      <Image src='/heart.svg' width={20} height={20} />
-    </>
+    <IconButton>
+      <Heart />
+      <Bookmark />
+      <Zap />
+      <Share />
+    </IconButton>
+
+  );
+}
+
+function IconButton({ icon, children }) {
+  return (
+    <div className={styles.wrapper}>
+      {
+        children.map((e, idx) => {
+          return (
+            <button key={idx} className={styles.iconWrapper} >
+              {e}
+            </button>
+          )
+        })
+      }
+    </div>
   );
 }
 

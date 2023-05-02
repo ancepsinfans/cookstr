@@ -54,7 +54,7 @@ function TagInput({ tags, dispatch }) {
           value={t}
           onChange={handleInputChange}
           onKeyDown={handleInputKeyDown}
-          placeholder="Type a tag and press Enter"
+          placeholder="Type a tag, then Enter"
         />
       </div>
     </div>
