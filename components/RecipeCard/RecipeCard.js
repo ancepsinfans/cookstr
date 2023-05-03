@@ -15,7 +15,7 @@ function RecipeCard({
 
     <fieldset key={recipe.id}  >
       <div style={{ display: 'flex', justifyContent: 'start' }}>
-        <IconHolder size={30} />
+        {/* <IconHolder size={30} /> */}
         <div style={{ display: 'block', margin: '0 0 0 15px' }}>
           <h2>
             <a href={`/r/${recipe.id}`}>{recipe.content.name}</a>
