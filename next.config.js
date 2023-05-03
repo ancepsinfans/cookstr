@@ -12,4 +12,4 @@ module.exports = withPWA({
   },
 });
 
-module.exports = nextConfig
+// module.exports = nextConfig
