@@ -2,29 +2,29 @@ import React from 'react';
 import { formAndSignEvent, sendEventToRelay } from '@/utils';
 import { useRouter } from 'next/router';
 import IconHolder from '../IconHolder/IconHolder';
+import { UserContext } from '../context/UserProvider';
+import Link from 'next/link';
 
 function RecipeCard({
   recipe,
   page = 'home',
   deleteable = false,
-  privateKey = ''
 }) {
-
   const router = useRouter()
+
   return (
 
     <fieldset key={recipe.id}  >
       <div style={{ display: 'flex', justifyContent: 'start' }}>
-        {/* <IconHolder size={30} /> */}
-        <div style={{ display: 'block', margin: '0 0 0 15px' }}>
+        <div style={{ display: 'block', margin: '0 0 0 15px', flexBasis: '95%' }}>
           <h2>
-            <a href={`/r/${recipe.id}`}>{recipe.content.name}</a>
+            <Link href={`/r/${recipe.id}`}>{recipe.content.name}</Link>
           </h2>
 
           {
             page !== 'user' ?
               <aside>
-                by <a href={`/u/${recipe.pubkey}`}>{recipe?.pubkey.slice(0, 5)}...</a>
+                by <Link href={`/u/${recipe.pubkey}`}>{recipe?.pubkey.slice(0, 5)}...</Link>
               </aside>
               : null
           }
@@ -56,6 +56,7 @@ function RecipeCard({
             null
           }
         </div>
+        <IconHolder recipe={recipe} size={30} />
       </div>
     </fieldset >
   )

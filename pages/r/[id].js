@@ -18,6 +18,7 @@ export default function User({ params }) {
                 {recipes.map((recipe) => {
                     return (
                         <RecipeCard
+                            key={recipe.id}
                             page='recipe'
                             recipe={recipe}
                             deleteable={(loggedIn && publicKey === recipe.pubkey)}

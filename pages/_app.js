@@ -13,6 +13,7 @@ const GlobalStyles = createGlobalStyle`
     --grey: ${constants.grey};
     --backgroundOrange: ${constants.backgroundOrange};
     --backgroundYellow: ${constants.backgroundYellow};
+    --backgroundTangerine: ${constants.backgroundTangerine}
     --blueAccent: ${constants.blueAccent};
     --teaAccent: ${constants.teaAccent};
     --darkTea: ${constants.darkTea};

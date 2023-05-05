@@ -1,5 +1,6 @@
  .wrapper {
      display: flex;
+     /* flex-basis: 20%; */
      flex-direction: column;
      justify-content: flex-start;
      padding: 4px;
@@ -15,23 +16,35 @@
 
  .iconWrapper {
      min-width: 30px;
-     /* border-radius: 4px; */
+     border-radius: 4px;
      border: none;
+     transition: fill 0.3s ease;
 
      border-radius: 100%;
      padding: 5px 0px 5px 3px;
      transition: background-color 200ms;
  }
 
- .iconWrapperPressed {
+ /* .iconWrapperPressed {
      background-color: var(--darkTea)
+ } */
+
+
+ .icon:hover path {
+     fill: var(--backgroundOrange)
  }
 
-
- .iconWrapper:hover {
-     background-color: var(--darkTea)
- }
-
- .iconWrapper:active {
+ .icon:active {
      transform: scale(.9);
+ }
+
+ .likes {
+     color: var(--blackMain);
+     font-weight: 700;
+     text-align: center;
+ }
+
+ .filled path {
+
+     fill: var(--backgroundOrange);
  }

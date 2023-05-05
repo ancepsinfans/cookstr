@@ -3,11 +3,8 @@ import React from 'react';
 export const UserContext = React.createContext();
 
 function UserProvider({ children }) {
-    // const [iv, setIv] = React.useState('')
-    // const [encryptedPrivateKey, setEncryptedPrivateKey] = React.useState('')
     const [privateKey, setPrivateKey] = React.useState('')
     const [publicKey, setPublicKey] = React.useState('')
-    // const [secret, setSecret] = React.useState('')
     const [loggedIn, setLoggedIn] = React.useState(false)
 
     React.useEffect(() => {
@@ -38,9 +35,7 @@ function UserProvider({ children }) {
         if (val.includes('nsec')) {
             let { data } = nip19.decode(val)
             v = data
-            console.log(v)
         }
-        console.log(v)
         setPrivateKey(v)
         localStorage.setItem('privateKey', v.toString())
         if (v.length === 64) {

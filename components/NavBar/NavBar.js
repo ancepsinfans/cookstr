@@ -30,54 +30,64 @@ const NavBar = () => {
       {`${publicKey?.slice(0, 5)}...`}
     </Link>
   )
+  const toBookmarks = (
+    <Link href={`/u/${publicKey}`}>
+      {`${publicKey?.slice(0, 5)}...`}
+    </Link>
+  )
 
   return (
 
     <NavBarStyled >
-      <Link href='/add-recipe'>
-        Add
-      </Link>
-
-      {router.asPath !== '/' ?
-
-        <Link
-          style={{ fontSize: 'x-large' }}
-          href='/'>
-          🍳
+      <div style={{ flexBasis: '25%', textAlign: 'center' }} >
+        <Link href='/add-recipe'>
+          Add
         </Link>
-        : (toUserProfile)
-      }
+      </div>
 
+      <div style={{ flexBasis: '50%', textAlign: 'center' }}>
+        {router.asPath !== '/' ?
 
-      {!loggedIn ? (
-        <Link
-          id='login'
-          href='/login'
-        >
-          Login
-        </Link>
-
-      ) : (
-
-        <div>
           <Link
-            id='logout'
-            href='/'
-            onClick={() => {
-              savePrivateKey('')
-              toggleLogin(false)
-            }}
-          >
-            Logout
+            style={{ fontSize: 'x-large' }}
+            href='/'>
+            🍳
           </Link>
-          {router.asPath !== '/' ?
-            (<>
-              {' // '}{toUserProfile}
-            </>) :
-            null}
-        </div>
-      )}
+          : (toUserProfile)
+        }
+      </div>
 
+
+      <div style={{ flexBasis: '25%', textAlign: 'center' }} >
+        {!loggedIn ? (
+          <Link
+            id='login'
+            href='/login'
+          >
+            Login
+          </Link>
+
+        ) : (
+
+          <div>
+            <Link
+              id='logout'
+              href='/'
+              onClick={() => {
+                savePrivateKey('')
+                toggleLogin(false)
+              }}
+            >
+              Logout
+            </Link>
+            {router.asPath !== '/' ?
+              (<>
+                {' // '}{toUserProfile}
+              </>) :
+              null}
+          </div>
+        )}
+      </div>
     </NavBarStyled >
   )
 }

@@ -14,7 +14,7 @@ export default function Home() {
 
                     return (
 
-                        <RecipeCard recipe={recipe} />
+                        <RecipeCard key={recipe.id} recipe={recipe} />
                     )
                 })
                 }

@@ -10,7 +10,6 @@ import {
 
 
 export function formAndSignEvent(privateKey, kind, content, tags = []) {
-
     let event = {
         kind,
         created_at: Math.floor(Date.now() / 1000),
