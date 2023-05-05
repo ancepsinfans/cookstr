@@ -60,6 +60,14 @@ function UserInfo({ params }) {
                     )
                 })
                 }
+                {recipes.length === 0 ?
+                    <fieldset>
+                        <h4>
+                            Go write a recipe!
+                        </h4>
+                    </fieldset>
+                    :
+                    null}
             </article>
         </>
     )
@@ -71,7 +79,7 @@ function Bookmarks() {
     const { bookmarks } = getBookmarks(publicKey)
     const booktags = []
     booktags.push(bookmarks.map(obj => obj.tags.find(tag => tag[0] === 'e')[1]))
-
+    console.log({ bookmarks })
     const { recipes } = getRecipes({ ids: booktags })
     return (
         <>
@@ -82,6 +90,14 @@ function Bookmarks() {
                     )
                 })
                 }
+                {recipes.length === 0 ?
+                    <fieldset>
+                        <h4>
+                            Bookmark a recipe! (or maybe wait a second for it to load)
+                        </h4>
+                    </fieldset>
+                    :
+                    null}
             </article>
         </>
     )
