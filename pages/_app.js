@@ -237,7 +237,35 @@ button {
   margin: 0 2% 0 ;
  }
 
+.adder {
+  min-width: 95%;
+  
+}
 
+.adderField {
+min-width: fit-content;
+max-width: 100%;
+}
+#add {
+  max-width: 100vw;
+  margin: 15px 0 0 0;
+  
+}
+
+.bigAdder {
+  min-width: 95vw;
+}
+
+}
+
+.adder {
+width: 75vw;
+}
+.bigAdder {
+  width: 85vw;
+}
+.adderField {
+min-width: fit-content;
 }
 
 main {
@@ -278,6 +306,7 @@ main>div {
   margin-left: 5px;
   line-height: 1.5;
 }
+
 
 `
 

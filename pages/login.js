@@ -40,16 +40,16 @@ export default function LoginPage() {
                         <button type='submit'>Login</button>
                     </fieldset>
                 </form>
-                <fieldset>
-                    <h3>Don't have a key?</h3>
+                <fieldset >
+                    <h3 >Don't have a key?</h3>
                     <aside>Generate one here</aside>
                     <button onClick={genKey}>
                         <Image height={25} width={25} src={'/images/running-nostr.gif'} />
                     </button>
                     {keys.pub !== '' ?
                         <>
-                            <p>Private key: {keys.priv}</p>
-                            <p>Public key: {keys.pub}</p>
+                            <p style={{ overflowWrap: 'anywhere' }}>Private key: {keys.priv}</p>
+                            <p style={{ overflowWrap: 'anywhere' }}>Public key: {keys.pub}</p>
                             <p>Save your private key somewhere safe, and don't share it with anyone!</p>
                         </>
                         : null

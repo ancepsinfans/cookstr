@@ -144,9 +144,9 @@ export default function Recipe() {
 
     return (
         <main >
-            <article id='add'>
-                <fieldset>
-                    <div >
+            <article id='add' >
+                <fieldset className='bigAdder'>
+                    <div className='holder' >
                         <h2>
                             Recipe for
                         </h2>
@@ -171,20 +171,22 @@ export default function Recipe() {
                                 )
                             })}
                         </ul>
-                        <form onSubmit={(e) => {
+                        <form
+                            className='adder'
+                            onSubmit={(e) => {
 
-                            e.preventDefault()
-                            dispatch({
-                                type: 'add-ingredient',
-                                amount,
-                                unit,
-                                ingredient
-                            })
-                            setAmount('')
-                            setIngredient('')
-                            setUnit('')
-                        }}>
-                            <fieldset >
+                                e.preventDefault()
+                                dispatch({
+                                    type: 'add-ingredient',
+                                    amount,
+                                    unit,
+                                    ingredient
+                                })
+                                setAmount('')
+                                setIngredient('')
+                                setUnit('')
+                            }}>
+                            <fieldset className='adderField'>
                                 <legend>Add ingredient</legend>
                                 <label htmlFor="amount">
                                     amount:{'\t'}
@@ -249,12 +251,14 @@ export default function Recipe() {
                                 )
                             })}
                         </ol>
-                        <form onSubmit={(e) => {
-                            e.preventDefault()
-                            dispatch({ type: 'add-step', step })
-                            setStep('')
-                        }}>
-                            <fieldset >
+                        <form
+                            className='adder'
+                            onSubmit={(e) => {
+                                e.preventDefault()
+                                dispatch({ type: 'add-step', step })
+                                setStep('')
+                            }}>
+                            <fieldset className='adderField' >
                                 <legend>Add step</legend>
                                 <label htmlFor="step">
                                     step:
